@@ -156,6 +156,19 @@ notebooks/EDA_LLM_Victoria_Uriel.ipynb
 
 
 ---
+---
+
+## 🔭 Future Directions
+
+MindShield lays the groundwork for LLM-based anonymization in mental health. Future work could explore:
+
+- Using alternative models (e.g., Claude, Gemini, LLaMA)
+- Fine-tuning on domain-specific data
+- Supporting multilingual records
+- Integrating human expert feedback
+- Testing anonymized data on downstream clinical tasks
+
+We welcome contributions and extensions!
 
 ## 👥 Developers
 
