@@ -150,4 +150,24 @@ notebooks/Anonymization_LLM_Victoria_Uriel.ipynb
 ➤ Applies LLM-based anonymization pipeline.
 
 notebooks/EDA_LLM_Victoria_Uriel.ipynb
+```
+
+
+
+---
+
+## 👥 Developers
+
+**MindShield** was developed as part of an academic project exploring LLM-based anonymization in mental health records.  
+
+Built with care and curiosity by:
+
+- **Victoria Chuykina**  
+- **Uriel Atzmon**
+
+Year: 2025
+
+---
+
+*For feedback, questions, or collaborations — feel free to reach out!*
 
