@@ -1,0 +1,101 @@
+Disorder,Clinical Question
+Major Depressive Disorder (MDD),Does the patient describe a persistent depressed mood?
+Major Depressive Disorder (MDD),Has the patient lost interest or pleasure in usual activities?
+Major Depressive Disorder (MDD),Is there mention of significant weight loss or gain?
+Major Depressive Disorder (MDD),Does the patient report insomnia or hypersomnia?
+Major Depressive Disorder (MDD),Is there observable psychomotor agitation or retardation?
+Major Depressive Disorder (MDD),Does the patient express fatigue or loss of energy?
+Major Depressive Disorder (MDD),Are there feelings of worthlessness or excessive guilt?
+Major Depressive Disorder (MDD),Is there diminished ability to concentrate or make decisions?
+Major Depressive Disorder (MDD),Does the patient mention recurrent thoughts of death or suicide?
+Major Depressive Disorder (MDD),Has the episode lasted at least two weeks?
+Generalized Anxiety Disorder (GAD),Does the patient report excessive worry occurring more days than not?
+Generalized Anxiety Disorder (GAD),Is the worry difficult for the patient to control?
+Generalized Anxiety Disorder (GAD),Are there signs of restlessness or feeling keyed up?
+Generalized Anxiety Disorder (GAD),Does the patient experience being easily fatigued?
+Generalized Anxiety Disorder (GAD),Is there difficulty concentrating or mind going blank?
+Generalized Anxiety Disorder (GAD),Does the patient report irritability?
+Generalized Anxiety Disorder (GAD),Are there muscle tension complaints?
+Generalized Anxiety Disorder (GAD),Is there sleep disturbance (difficulty falling or staying asleep)?
+Generalized Anxiety Disorder (GAD),Have symptoms been present for at least six months?
+Generalized Anxiety Disorder (GAD),Do the symptoms interfere with daily functioning?
+Post-Traumatic Stress Disorder (PTSD),Has the patient experienced or witnessed a traumatic event?
+Post-Traumatic Stress Disorder (PTSD),Does the patient have intrusive distressing memories of the trauma?
+Post-Traumatic Stress Disorder (PTSD),Are there recurrent distressing dreams related to the trauma?
+Post-Traumatic Stress Disorder (PTSD),Does the patient experience flashbacks or dissociative reactions?
+Post-Traumatic Stress Disorder (PTSD),Is there avoidance of reminders of the trauma?
+Post-Traumatic Stress Disorder (PTSD),Does the patient show negative alterations in mood or cognition?
+Post-Traumatic Stress Disorder (PTSD),Are there feelings of detachment or estrangement from others?
+Post-Traumatic Stress Disorder (PTSD),Is there increased arousal or exaggerated startle response?
+Post-Traumatic Stress Disorder (PTSD),Does the patient report sleep disturbances or irritability?
+Post-Traumatic Stress Disorder (PTSD),Have these symptoms persisted for more than one month?
+Obsessive-Compulsive Disorder (OCD),"Does the patient experience recurrent, unwanted thoughts or urges?"
+Obsessive-Compulsive Disorder (OCD),Are these obsessions intrusive and cause anxiety?
+Obsessive-Compulsive Disorder (OCD),Does the patient engage in repetitive behaviors or mental acts?
+Obsessive-Compulsive Disorder (OCD),Are compulsions performed to reduce anxiety or prevent a dreaded event?
+Obsessive-Compulsive Disorder (OCD),Do the compulsions seem excessive or not connected realistically?
+Obsessive-Compulsive Disorder (OCD),Does the patient recognize the obsessions/compulsions as unreasonable?
+Obsessive-Compulsive Disorder (OCD),Do symptoms take up more than one hour per day?
+Obsessive-Compulsive Disorder (OCD),Do the symptoms cause significant distress or impairment?
+Obsessive-Compulsive Disorder (OCD),Is the patient avoiding situations that trigger obsessions?
+Obsessive-Compulsive Disorder (OCD),Has the patient sought help for managing these symptoms?
+Bipolar I Disorder,Has the patient experienced a distinct period of abnormally elevated mood?
+Bipolar I Disorder,Is there increased goal-directed activity or energy during the episode?
+Bipolar I Disorder,Has the patient shown inflated self-esteem or grandiosity?
+Bipolar I Disorder,Is there decreased need for sleep without feeling tired?
+Bipolar I Disorder,Does the patient exhibit more talkativeness than usual?
+Bipolar I Disorder,Is there flight of ideas or racing thoughts?
+Bipolar I Disorder,Has the patient shown distractibility?
+Bipolar I Disorder,"Are there risky behaviors (e.g., spending, sexual, driving)?"
+Bipolar I Disorder,Has the mood disturbance caused social or occupational impairment?
+Bipolar I Disorder,Has the episode lasted at least 7 days or required hospitalization?
+Schizophrenia,Does the patient experience delusions?
+Schizophrenia,Are there auditory or visual hallucinations?
+Schizophrenia,Has the patient shown disorganized speech?
+Schizophrenia,Are there grossly disorganized or catatonic behaviors?
+Schizophrenia,"Is there evidence of negative symptoms (e.g., flat affect)?"
+Schizophrenia,Have symptoms persisted for at least 6 months?
+Schizophrenia,Has there been social or occupational dysfunction?
+Schizophrenia,Is there no evidence of mood disorder or substance use explaining the symptoms?
+Schizophrenia,Does the patient demonstrate poor insight into their condition?
+Schizophrenia,Are symptoms present continuously for at least one month?
+Panic Disorder,"Does the patient report sudden, intense episodes of fear?"
+Panic Disorder,Are panic attacks recurrent and unexpected?
+Panic Disorder,Does the patient experience palpitations or accelerated heart rate?
+Panic Disorder,Is there shortness of breath or choking sensations during attacks?
+Panic Disorder,Has the patient changed behavior to avoid attacks?
+Panic Disorder,Is there persistent concern about having more attacks?
+Panic Disorder,Are there chills or heat sensations?
+Panic Disorder,Does the patient feel detached from reality during episodes?
+Panic Disorder,Do attacks cause significant distress or impairment?
+Panic Disorder,Are attacks not attributable to other medical or mental conditions?
+ADHD (Attention-Deficit/Hyperactivity Disorder),Does the patient have difficulty sustaining attention in tasks?
+ADHD (Attention-Deficit/Hyperactivity Disorder),Are there frequent careless mistakes in school or work?
+ADHD (Attention-Deficit/Hyperactivity Disorder),Does the patient often lose things necessary for tasks?
+ADHD (Attention-Deficit/Hyperactivity Disorder),Is the patient easily distracted by extraneous stimuli?
+ADHD (Attention-Deficit/Hyperactivity Disorder),Does the patient forget daily activities?
+ADHD (Attention-Deficit/Hyperactivity Disorder),"Are there signs of hyperactivity, such as fidgeting or restlessness?"
+ADHD (Attention-Deficit/Hyperactivity Disorder),Does the patient often leave seat when remaining seated is expected?
+ADHD (Attention-Deficit/Hyperactivity Disorder),Is there excessive talking or interrupting others?
+ADHD (Attention-Deficit/Hyperactivity Disorder),Do symptoms appear before age 12?
+ADHD (Attention-Deficit/Hyperactivity Disorder),"Are symptoms present in two or more settings (e.g., school and home)?"
+Borderline Personality Disorder (BPD),Does the patient show intense fear of abandonment?
+Borderline Personality Disorder (BPD),Are there unstable and intense interpersonal relationships?
+Borderline Personality Disorder (BPD),Does the patient experience identity disturbance?
+Borderline Personality Disorder (BPD),Is there impulsivity in at least two self-damaging areas?
+Borderline Personality Disorder (BPD),Has the patient made recurrent suicidal threats or gestures?
+Borderline Personality Disorder (BPD),Does the patient report affective instability or mood swings?
+Borderline Personality Disorder (BPD),Is there chronic feelings of emptiness?
+Borderline Personality Disorder (BPD),"Does the patient demonstrate inappropriate, intense anger?"
+Borderline Personality Disorder (BPD),"Are there transient, stress-related paranoid ideation?"
+Borderline Personality Disorder (BPD),Do these patterns cause significant impairment in functioning?
+Social Anxiety Disorder,Does the patient have intense fear of social situations?
+Social Anxiety Disorder,Is the fear of being negatively evaluated or embarrassed?
+Social Anxiety Disorder,Does the patient avoid social interactions?
+Social Anxiety Disorder,Is the fear out of proportion to the actual threat?
+Social Anxiety Disorder,Does the anxiety interfere with daily life or functioning?
+Social Anxiety Disorder,Has the fear persisted for 6 months or more?
+Social Anxiety Disorder,Is there marked distress before or during social events?
+Social Anxiety Disorder,Does the patient experience physical symptoms in social settings?
+Social Anxiety Disorder,"Are social fears limited to specific situations (e.g., public speaking)?"
+Social Anxiety Disorder,Is the fear not better explained by another condition?
