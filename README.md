@@ -183,7 +183,7 @@ Anonymization-of-Mental-Health-Records/
 │   └── Validation_QA_LLM_Victoria_Uriel.ipynb      # QA-based validation (BERTScore + LLM-judge)
 │
 ├── Presentation/                                  # Slide decks / reports
-│   ├── MindShield.pdf                             # Original project proposal
+│   ├── MindShield_Proposal.pdf                    # Original project proposal
 │   ├── MindShield_Interim_Report.pptx             # Interim report deck
 │   └── MindShield_Final_Report.pptx               # Final report deck (final validated results)
 │
