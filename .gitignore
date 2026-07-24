@@ -1,0 +1,20 @@
+# Secrets — never commit real API keys
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code local tooling config — not part of the project itself
+.claude/
+
+# Raw QA-validation results (~144MB, exceeds GitHub's file-size limit) —
+# the compressed Data/qa_validation_results.csv.gz (~7MB) is committed instead.
+Data/qa_validation_results.csv
