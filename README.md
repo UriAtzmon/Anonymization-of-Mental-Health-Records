@@ -84,7 +84,7 @@ Seven anonymization configurations were validated on all 878 patients with three
 
 ### Known limitations
 
-- **Dataset scale**: 878 synthetic patients, not the original 5,000-patient target — limited by generation API cost/time; disorder balance (68–106 patients per class) is preserved.
+- **Dataset scale**: 878 synthetic patients — limited by generation API cost/time; disorder balance (68–106 patients per class) is preserved. The dataset could be scaled up further in future work.
 - **API error rows**: GPT-4o (119/878 rows) and DeepSeek-V4-Pro (~86/878 rows) hit transient Azure/OpenAI errors, excluded from that model's percentages. `gpt-5-mini` failed on 657/878 (75%) rows due to unresolved parameter-support errors and is excluded from all comparisons — left as future work.
 - **BERTScore floor effect**: PQ/CQ BERTScore cluster tightly (0.886–0.911) regardless of real content overlap, since short answers score unexpectedly close to detailed ones under roberta-large embeddings — the binary LLM-judge is the more trustworthy metric for this reason.
 - **LLM-judge sample size**: run on 50 patients per model (not all 878) for cost/time reasons; its CQ recoverable % (29–38%) likely reflects judge strictness on long clinical answers rather than a real utility weakness — tag-based clinical retention (95–99.9%) is the more reliable utility number.
@@ -238,7 +238,7 @@ AZURE_KEY_URIEL_EASTUS2=...      # for the Azure AI Foundry models (Phi-4-class 
 
 MindShield lays the groundwork for LLM-based anonymization in mental health. Concretely on the roadmap (see [Known limitations](#known-limitations) above for what's already been diagnosed):
 
-- Scale the synthetic dataset toward the original 5,000-patient target (currently 878)
+- Scale the synthetic dataset further (currently 878 patients)
 - Fix `gpt-5-mini`'s parameter-support errors and re-validate it alongside the other 7 configurations
 - Run the LLM-judge on the full 878-patient set rather than a 50-patient sample
 - Fine-tune a smaller model on the synthetic dataset for a cheaper, self-hosted anonymizer
