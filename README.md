@@ -1,5 +1,7 @@
 ## 🧠 Introduction
 
+![MindShield Visual Abstract](./Presentation/MindShield_Visual_Abstract.png)
+
 Psychiatric clinical notes contain some of the most sensitive personal information in healthcare, including references to names, dates, locations, and detailed personal histories. Ensuring patient privacy while preserving the clinical value of such records is a critical challenge in the age of AI-powered health systems.
 
 Large Language Models (LLMs) offer powerful capabilities for understanding and generating natural language, including potential applications in de-identification and clinical documentation. However, traditional anonymization tools often fail to handle the nuance and contextual complexity of psychiatric texts—either over-sanitizing (removing useful content) or missing sensitive identifiers.
@@ -183,6 +185,7 @@ Anonymization-of-Mental-Health-Records/
 │   └── Validation_QA_LLM_Victoria_Uriel.ipynb      # QA-based validation (BERTScore + LLM-judge)
 │
 ├── Presentation/                                  # Slide decks / reports
+│   ├── MindShield_Visual_Abstract.png             # One-page infographic: problem, approach, key result
 │   ├── MindShield_Proposal.pdf                    # Original project proposal
 │   ├── MindShield_Interim_Report.pptx             # Interim report deck
 │   └── MindShield_Final_Report.pptx               # Final report deck (final validated results)
