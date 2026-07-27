@@ -68,17 +68,21 @@ flowchart LR
 
 Seven anonymization configurations were validated on all 878 patients with three methods: tag-based exact-match, QA-based re-answering scored with BERTScore, and a binary LLM-judge on a 50-patient sample. The **LLM-judge leaderboard is the primary result** — the validation notebook's own analysis concludes this is the more trustworthy metric (BERTScore has a floor-effect on short answers; tag-based exact-match misses paraphrased leaks). Tag-based numbers are reported alongside as a secondary, weaker check.
 
+Because the judge model (`Llama-4-Maverick`) is also 3 of the 7 anonymizers being judged, the leaderboard was **re-run with an independent judge** (`gpt-5-mini`, zero overlap with any anonymizer) as a bias check — both gaps are shown below.
+
 **Primary — LLM-judge (privacy–utility leaderboard):**
 
-| Model / prompt | PQ recoverable (lower = more private) | CQ recoverable (higher = more useful) | Privacy–utility gap |
-|---|---|---|---|
-| **Llama-4-Maverick (instructional)** | **5.2%** | 38.0% | **32.8pp** |
-| Llama-4-Maverick (few-shot) | 6.4% | 37.9% | 31.5pp |
-| GPT-3.5-turbo | 10.6% | 34.6% | 24.0pp |
-| GPT-4o | 11.4% | 34.0% | 22.5pp |
-| DeepSeek-V4-Pro | 14.0% | 33.7% | 19.6pp |
-| Llama-4-Maverick (synthetic-identity) | 15.2% | 32.4% | 17.2pp |
-| NER baseline | 15.6% | 29.0% | 13.4pp |
+| Model / prompt | PQ recoverable | CQ recoverable | Gap (Llama judge) | Gap (independent judge, gpt-5-mini) |
+|---|---|---|---|---|
+| **Llama-4-Maverick (instructional)** | **5.2%** | 38.0% | **32.8pp** | **12.8pp** |
+| Llama-4-Maverick (few-shot) | 6.4% | 37.9% | 31.5pp | 11.6pp |
+| GPT-3.5-turbo | 10.6% | 34.6% | 24.0pp | 10.4pp |
+| GPT-4o | 11.4% | 34.0% | 22.5pp | 5.8pp |
+| DeepSeek-V4-Pro | 14.0% | 33.7% | 19.6pp | 5.1pp |
+| NER baseline | 15.6% | 29.0% | 13.4pp | 2.6pp |
+| Llama-4-Maverick (synthetic-identity) | 15.2% | 32.4% | 17.2pp | 0.0pp |
+
+*(PQ/CQ % columns above are from the original Llama-judge; sorted by that judge's gap — the independent-judge gap column shows how much the ranking shifts. Full independent-judge PQ/CQ breakdown is in the notebook.)*
 
 **Secondary — tag-based exact-match (a weaker notion of "removed": a paraphrased leak still counts as removed here):**
 
@@ -92,12 +96,11 @@ Seven anonymization configurations were validated on all 878 patients with three
 | Llama-4-Maverick (synthetic-identity) | 60.7% | 99.9% |
 | NER baseline | 53.5% | 68.1% |
 
-Both methods agree on the ranking direction, which is why the same model wins both — but only the LLM-judge table should be read as the headline number.
-
-- **Rephrasing beats entity masking**: every LLM preserves far more clinical content than the NER baseline (95–99.9% vs. 68.1% tag-based; 32.4–38.0% vs. 29.0% CQ-recoverable), at comparable or better privacy.
-- **Prompt engineering didn't beat the plain instruction**: neither few-shot examples nor a synthetic-identity rewrite outperformed the baseline instructional prompt on Llama-4-Maverick — synthetic-identity actually leaked *more* PII on both metrics.
-- **Caveat under active review**: the LLM-judge itself is `Llama-4-Maverick`, the same model family as the winning configuration (in fact the exact same model for 3 of the 7 rows judged). This is a known bias risk (LLM self-preference) and is being re-checked with an independent judge model that isn't among the anonymizers — see [Known limitations](#known-limitations).
-- See [`Presentation/MindShield_Final_Report.pptx`](./Presentation/MindShield_Final_Report.pptx) for the full write-up, and `Data/qa_validation_summary.xlsx` / `Notebooks/Validation_QA_LLM_Victoria_Uriel.ipynb` for the underlying analysis.
+- **The winner is robust, the loser isn't.** Llama-4-Maverick (instructional) wins under both judges, and the top-3 order is identical either way — the self-preference bias did not inflate its win. But NER — the clear "worst" under the original judge — is *not* clearly worst under the independent judge, where the synthetic-identity Llama variant drops to last place instead. Judge choice measurably changes which configuration looks worst, even though it doesn't change which one looks best.
+- **Rephrasing beats entity masking — on tag-based evidence, robustly.** NER preserves far less clinical content than every LLM on the exact-match check (68.1% vs. 95–99.9%), and that check doesn't involve any LLM judge at all, so it isn't subject to the same bias question. Treat this as the solid version of the "rephrasing > masking" claim; the LLM-judge version of the same claim is weaker (see above).
+- **Prompt engineering didn't beat the plain instruction**: neither few-shot examples nor a synthetic-identity rewrite outperformed the baseline instructional prompt on Llama-4-Maverick, under either judge.
+- **Don't over-read single-decimal-point rankings.** Switching judges shrank every gap substantially (e.g. 32.8pp → 12.8pp for the same model) and reordered the bottom of the table. With no confidence intervals and this much judge-to-judge disagreement on magnitude, differences of a few points shouldn't be treated as meaningful.
+- See [`Presentation/MindShield_Final_Report.pptx`](./Presentation/MindShield_Final_Report.pptx) for the full write-up, and `Data/qa_validation_summary.xlsx` / `Notebooks/Validation_QA_LLM_Victoria_Uriel.ipynb` (Robustness check section) for the underlying analysis.
 
 ### Known limitations
 
@@ -105,7 +108,7 @@ Both methods agree on the ranking direction, which is why the same model wins bo
 - **API error rows**: GPT-4o (119/878 rows) and DeepSeek-V4-Pro (~86/878 rows) hit transient Azure/OpenAI errors, excluded from that model's percentages. `gpt-5-mini` failed on 657/878 (75%) rows due to unresolved parameter-support errors and is excluded from all comparisons — left as future work.
 - **BERTScore floor effect**: PQ/CQ BERTScore cluster tightly (0.886–0.911) regardless of real content overlap, since short answers score unexpectedly close to detailed ones under roberta-large embeddings — the binary LLM-judge is the more trustworthy metric for this reason.
 - **LLM-judge sample size**: run on 50 patients per model (not all 878) for cost/time reasons; its CQ recoverable % (29–38%) likely reflects judge strictness on long clinical answers rather than a real utility weakness — tag-based clinical retention (95–99.9%) is the more reliable utility number.
-- **LLM-judge self-preference risk**: the judge model is `Llama-4-Maverick`, which is also the winning anonymizer (in 3 of the 7 configurations judged). A model judging its own output is a known bias risk. *Status: being re-checked with `DeepSeek-V4-Pro` as an independent judge (not among the anonymizer family) — results to follow.*
+- **LLM-judge self-preference bias — checked, partially confirmed.** The judge model is `Llama-4-Maverick`, which is also 3 of the 7 anonymizers being judged. Re-running the judge with `gpt-5-mini` (zero overlap with any anonymizer) confirms the top of the leaderboard is robust — same winner, same top-3 order — but the bottom is not: NER was the clear worst under the original judge, while the synthetic-identity Llama variant is worst under the independent judge. See the [Results](#-results) table above and the notebook's "Robustness check" section for the full comparison.
 
 ## 🧾 Project Data
 
