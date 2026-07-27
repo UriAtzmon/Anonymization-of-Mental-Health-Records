@@ -61,25 +61,42 @@ flowchart LR
     S1 --> S2 --> S3 --> S4 --> S5
 ```
 
-**Input:** free text containing extended PII (ePII) — names, family, trauma, immigration, contact info — beyond the 18 standard HIPAA identifiers.
+**Input:** free text containing extended PII (ePII) — names, family, trauma, immigration, contact info — spanning both standard HIPAA identifiers and indirect quasi-identifiers not covered by HIPAA (see [ePII Framework](#-personal-questions-epii-framework) below).
 **Output:** rewritten note via context-aware rephrasing (not entity masking) — ePII removed, clinical meaning preserved.
 
 ## 🏆 Results
 
-Seven anonymization configurations were validated on all 878 patients with three independent methods — tag-based exact-match, QA-based re-answering scored with BERTScore, and a binary LLM-judge on a 50-patient sample. All three agree on the winner:
+Seven anonymization configurations were validated on all 878 patients with three methods: tag-based exact-match, QA-based re-answering scored with BERTScore, and a binary LLM-judge on a 50-patient sample. The **LLM-judge leaderboard is the primary result** — the validation notebook's own analysis concludes this is the more trustworthy metric (BERTScore has a floor-effect on short answers; tag-based exact-match misses paraphrased leaks). Tag-based numbers are reported alongside as a secondary, weaker check.
 
-| Model / prompt | Tag-based PII removed | Tag-based clinical preserved | LLM-judge PQ recoverable | LLM-judge CQ recoverable | Privacy–utility gap |
-|---|---|---|---|---|---|
-| **Llama-4-Maverick (instructional)** | **85.0%** | 99.5% | **5.2%** | 38.0% | **32.8pp** |
-| Llama-4-Maverick (few-shot) | 80.6% | 96.0% | 6.4% | 37.9% | 31.5pp |
-| GPT-3.5-turbo | 66.5% | 99.6% | 10.6% | 34.6% | 24.0pp |
-| GPT-4o | 64.5% | 99.8% | 11.4% | 34.0% | 22.5pp |
-| DeepSeek-V4-Pro | 73.3% | 99.9% | 14.0% | 33.7% | 19.6pp |
-| Llama-4-Maverick (synthetic-identity) | 60.7% | 99.9% | 15.2% | 32.4% | 17.2pp |
-| NER baseline | 53.5% | 68.1% | 15.6% | 29.0% | 13.4pp |
+**Primary — LLM-judge (privacy–utility leaderboard):**
 
-- **Rephrasing beats entity masking**: every LLM preserves far more clinical content than the NER baseline (95–99.9% vs. 68.1%), at comparable or better privacy.
-- **Prompt engineering didn't beat the plain instruction**: neither few-shot examples nor a synthetic-identity rewrite outperformed the baseline instructional prompt on Llama-4-Maverick — synthetic-identity actually leaked *more* PII (60.7% vs. 85.0% removed).
+| Model / prompt | PQ recoverable (lower = more private) | CQ recoverable (higher = more useful) | Privacy–utility gap |
+|---|---|---|---|
+| **Llama-4-Maverick (instructional)** | **5.2%** | 38.0% | **32.8pp** |
+| Llama-4-Maverick (few-shot) | 6.4% | 37.9% | 31.5pp |
+| GPT-3.5-turbo | 10.6% | 34.6% | 24.0pp |
+| GPT-4o | 11.4% | 34.0% | 22.5pp |
+| DeepSeek-V4-Pro | 14.0% | 33.7% | 19.6pp |
+| Llama-4-Maverick (synthetic-identity) | 15.2% | 32.4% | 17.2pp |
+| NER baseline | 15.6% | 29.0% | 13.4pp |
+
+**Secondary — tag-based exact-match (a weaker notion of "removed": a paraphrased leak still counts as removed here):**
+
+| Model / prompt | PII removed | Clinical content preserved |
+|---|---|---|
+| Llama-4-Maverick (instructional) | 85.0% | 99.5% |
+| Llama-4-Maverick (few-shot) | 80.6% | 96.0% |
+| GPT-3.5-turbo | 66.5% | 99.6% |
+| GPT-4o | 64.5% | 99.8% |
+| DeepSeek-V4-Pro | 73.3% | 99.9% |
+| Llama-4-Maverick (synthetic-identity) | 60.7% | 99.9% |
+| NER baseline | 53.5% | 68.1% |
+
+Both methods agree on the ranking direction, which is why the same model wins both — but only the LLM-judge table should be read as the headline number.
+
+- **Rephrasing beats entity masking**: every LLM preserves far more clinical content than the NER baseline (95–99.9% vs. 68.1% tag-based; 32.4–38.0% vs. 29.0% CQ-recoverable), at comparable or better privacy.
+- **Prompt engineering didn't beat the plain instruction**: neither few-shot examples nor a synthetic-identity rewrite outperformed the baseline instructional prompt on Llama-4-Maverick — synthetic-identity actually leaked *more* PII on both metrics.
+- **Caveat under active review**: the LLM-judge itself is `Llama-4-Maverick`, the same model family as the winning configuration (in fact the exact same model for 3 of the 7 rows judged). This is a known bias risk (LLM self-preference) and is being re-checked with an independent judge model that isn't among the anonymizers — see [Known limitations](#known-limitations).
 - See [`Presentation/MindShield_Final_Report.pptx`](./Presentation/MindShield_Final_Report.pptx) for the full write-up, and `Data/qa_validation_summary.xlsx` / `Notebooks/Validation_QA_LLM_Victoria_Uriel.ipynb` for the underlying analysis.
 
 ### Known limitations
@@ -88,6 +105,7 @@ Seven anonymization configurations were validated on all 878 patients with three
 - **API error rows**: GPT-4o (119/878 rows) and DeepSeek-V4-Pro (~86/878 rows) hit transient Azure/OpenAI errors, excluded from that model's percentages. `gpt-5-mini` failed on 657/878 (75%) rows due to unresolved parameter-support errors and is excluded from all comparisons — left as future work.
 - **BERTScore floor effect**: PQ/CQ BERTScore cluster tightly (0.886–0.911) regardless of real content overlap, since short answers score unexpectedly close to detailed ones under roberta-large embeddings — the binary LLM-judge is the more trustworthy metric for this reason.
 - **LLM-judge sample size**: run on 50 patients per model (not all 878) for cost/time reasons; its CQ recoverable % (29–38%) likely reflects judge strictness on long clinical answers rather than a real utility weakness — tag-based clinical retention (95–99.9%) is the more reliable utility number.
+- **LLM-judge self-preference risk**: the judge model is `Llama-4-Maverick`, which is also the winning anonymizer (in 3 of the 7 configurations judged). A model judging its own output is a known bias risk. *Status: being re-checked with `DeepSeek-V4-Pro` as an independent judge (not among the anonymizer family) — results to follow.*
 
 ## 🧾 Project Data
 
@@ -124,6 +142,8 @@ Example prompts include:
 - *"Full Residential Address:"*
 - *"Current Workplace:"*
 - *"Have you experienced significant trauma? If so – what:"*
+
+**Terminology note:** "ePII" is this project's own umbrella term for the personal-info tag set (`NAME`, `AGE`, `LOCATION`, `ORG`, `CONTACT`, `DATE`, `NATIONALITY`, `LANGUAGE`, `RELIGION`, `FAMILY`, `TRAUMA`, `IMMIGRATION`, `OCCUPATION`), not a term from the de-identification literature. Within it, two distinct categories exist: **direct identifiers** already covered by HIPAA's Safe Harbor list (`NAME`, `CONTACT`, `DATE`) and **indirect quasi-identifiers** — attributes that don't identify a patient alone but can in combination, and are *not* on HIPAA's list (`FAMILY`, `TRAUMA`, `IMMIGRATION`, `OCCUPATION`, `RELIGION`, `NATIONALITY`). "Quasi-identifier" is the established term for the latter category in the de-identification literature (Dalenius, 1986; Sweeney's k-anonymity work) — it's the indirect-identifier half of ePII that is this project's actual point of novelty relative to standard HIPAA-only de-identification.
 
 ---
 
