@@ -18,3 +18,6 @@ Thumbs.db
 # Raw QA-validation results (~144MB, exceeds GitHub's file-size limit) —
 # the compressed Data/qa_validation_results.csv.gz (~7MB) is committed instead.
 Data/qa_validation_results.csv
+
+# Personal/internal — not for the shared repo
+Presentation/MindShield_Final_Report_Transcript.docx
