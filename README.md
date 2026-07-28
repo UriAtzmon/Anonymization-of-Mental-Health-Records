@@ -211,7 +211,8 @@ Anonymization-of-Mental-Health-Records/
 │   ├── MindShield_Visual_Abstract.png             # One-page infographic: problem, approach, key result
 │   ├── MindShield_Proposal.pdf                    # Original project proposal
 │   ├── MindShield_Interim_Report.pptx             # Interim report deck
-│   └── MindShield_Final_Report.pptx               # Final report deck (final validated results)
+│   ├── MindShield_Final_Report.pptx               # Final report deck (final validated results)
+│   └── MindShield_Final_Report_Transcript.docx    # Hebrew speaker script for the Final Report deck
 │
 ├── .env.example                                   # Template for required API keys (copy to .env)
 ├── requirements.txt                               # Environment dependencies
